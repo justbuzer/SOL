@@ -1,0 +1,2 @@
+# SOL
+An Android assistant
