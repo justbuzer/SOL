@@ -15,6 +15,10 @@ class MainActivity : AppCompatActivity() {
     private lateinit var buttonMic: ImageButton
     private lateinit var speechRecognizer: SpeechRecognizer
 
+    // List to store speech history
+    private val speechHistory = mutableListOf<String>()
+    private val maxHistorySize = 20  // Limit the history
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -29,7 +33,7 @@ class MainActivity : AppCompatActivity() {
             putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault())
         }
 
-        // Handle mic button hold
+        // Handle mic button touch events
         buttonMic.setOnTouchListener { _, motionEvent ->
             when (motionEvent.action) {
                 android.view.MotionEvent.ACTION_DOWN -> {
@@ -55,7 +59,19 @@ class MainActivity : AppCompatActivity() {
             }
             override fun onResults(results: Bundle?) {
                 val matches = results?.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION)
-                textViewSpeech.text = matches?.get(0) ?: "No speech detected"
+                val recognizedText = matches?.get(0) ?: "No speech detected"
+
+                // Add recognized text to history
+                if (speechHistory.size >= maxHistorySize) {
+                    // Remove the oldest item if history exceeds the limit
+                    speechHistory.removeAt(0)
+                }
+
+                // Add the new recognized text to the history
+                speechHistory.add(recognizedText)
+
+                // Update the TextView to display all history (joined with newlines)
+                textViewSpeech.text = speechHistory.joinToString("\n")
             }
             override fun onPartialResults(partialResults: Bundle?) {}
             override fun onEvent(eventType: Int, params: Bundle?) {}
