@@ -6,7 +6,7 @@
     android:orientation="vertical"
     android:padding="16dp">
 
-    <!-- Text Box to Display Recognized Speech -->
+<!-- Text Box to Display Recognized Speech -->
     <TextView
     android:id="@+id/textViewSpeech"
     android:layout_width="match_parent"
@@ -16,15 +16,18 @@
     android:layout_alignParentEnd="true"
     android:layout_marginBottom="16dp"
     android:layout_weight="0.75"
-    android:background="@android:color/black"  
+    android:background="@android:color/black"
     android:padding="16dp"
     android:gravity="top|start"
-    android:text="Say a word"
+    android:text=" "
     android:textSize="16sp"
     android:textColor="#00FF00"
-    android:scrollbars="vertical" />
+    android:scrollbars="vertical"
+    android:ellipsize="none"
+    android:scrollHorizontally="false" />
 
 
+<!-- Mic Button -->
     <ImageButton
     android:id="@+id/buttonMic"
     android:layout_width="64dp"
