@@ -17,7 +17,7 @@ class MainActivity : AppCompatActivity() {
 
     // List to store speech history
     private val speechHistory = mutableListOf<String>()
-    private val maxHistorySize = 20  // Limit the history
+    private val maxHistorySize = 4  // Limit the history
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
